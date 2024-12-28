@@ -1,0 +1,32 @@
+# Environment configuration
+.env
+*.env
+.env.*
+
+# Secret files
+*.pem
+*.key
+*.crt
+
+# Volumes Docker
+data/
+postgres-data/
+mysql-data/
+volumes/
+
+# Logs
+log/
+logs/
+*.log
+
+# Temp files and cache
+.docker/.cache/
+*.tmp
+*.temp
+.DS_Store
+
+# Builds and images
+*.tar
+*.tar.gz
+build/
+dist/

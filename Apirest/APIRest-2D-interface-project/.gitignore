@@ -1,0 +1,36 @@
+# Build and compilation
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+*.exe
+*.dll
+*.pdb
+
+# Environment configuration
+appsettings.Development.json
+appsettings.Production.json
+appsettings.json
+*.user
+*.vspscc
+
+# Packages and dependencies
+packages/
+node_modules/
+
+# Temp files and cache
+[Tt]emp/
+.vscode/
+*.cache
+*.log
+
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Publication files
+*.pubxml
+*.publishproj
