@@ -1,8 +1,11 @@
 # Environment configuration
 .env
 *.env
-.env.*
-!.env.example
+.env.local
+.env.development
+.env.test
+.env.production
+
 
 # Secret files
 *.pem
