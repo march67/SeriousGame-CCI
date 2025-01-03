@@ -1,29 +1,46 @@
+using APIRest_2D_interface_project.Business.Services.Implementations;
+using APIRest_2D_interface_project.Business.Services.Interfaces;
 using APIRest_2D_interface_project.DataAccess.Context;
+using APIRest_2D_interface_project.DataAccess.Repositories.Implementations;
+using APIRest_2D_interface_project.DataAccess.Repositories.Interfaces;
+using APIRest_2D_interface_project.Domain.Entities;
+using APIRest_2D_interface_project.Infrastructure.Mappings;
+using APIRest_2D_interface_project.Infrastructure.Mappings.Profiles;
+using APIRest_2D_interface_project.Infrastructure.Services.Implementations;
+using APIRest_2D_interface_project.Infrastructure.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Ajout des services au conteneur de dépendances
+// Add services to the DI container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Postgresql")));
 
-// Pipeline HTTP
+// Others
+builder.Services.AddScoped<User>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+// Mapping Configuration
+builder.Services.AddMappingConfiguration();
+
+// HTTP Pipeline
 var app = builder.Build();
 
-// Configuration des middlewares
+// Middlewares configuration
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Sécurité et routage
+// Routage and security
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
-// Exécution
+// Execution
 app.Run();

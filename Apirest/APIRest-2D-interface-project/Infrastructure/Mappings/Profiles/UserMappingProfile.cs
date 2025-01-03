@@ -13,8 +13,8 @@ namespace APIRest_2D_interface_project.Infrastructure.Mappings.Profiles
             _passwordHashingService = passwordHashingService;
 
             CreateMap<UserDTO, User>()
-                .ForMember(dest => dest.Password,
-                          opt => opt.MapFrom(src => _passwordHashingService.HashPassword(src.Password)));
+                .ForMember(destination => destination.PasswordHash,
+                          option => option.MapFrom(source => _passwordHashingService.HashPassword(source.Password)));
 
             CreateMap<User, UserDTO>();
         }
