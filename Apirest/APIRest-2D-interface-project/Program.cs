@@ -21,11 +21,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Others
 builder.Services.AddScoped<User>();
+builder.Services.AddScoped<IPasswordHashingService, PasswordHashingService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 // Mapping Configuration
-builder.Services.AddMappingConfiguration();
+builder.Services.AddAutoMapper(typeof(UserMappingProfile));
 
 // HTTP Pipeline
 var app = builder.Build();

@@ -38,22 +38,6 @@ namespace APIRest_2D_interface_project.DataAccess.Context
                 entity.Property(e => e.IsVerified)
                 .HasDefaultValue(false);
 
-                // Checks configuration
-                entity.ToTable("Users", tb =>
-                {
-                    // Username
-                    tb.HasCheckConstraint("CK_Users_UsernameLength",
-                        "LEN([Username]) >= 4");
-
-                    // Checks password rule
-                    tb.HasCheckConstraint("CK_Users_PasswordComplexity",
-                        @"[Password] LIKE '%[A-Z]%'
-                        AND [Password] LIKE '%[a-z]%'
-                        AND [Password] LIKE '%[0-9]%'
-                        AND [Password] LIKE '%[!@#$%^&*()]%'
-                        AND LEN([Password]) >= 8");
-                });
-
             });
         }
     }

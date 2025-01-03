@@ -27,8 +27,7 @@ namespace APIRest_2D_interface_project.Presentation.Controllers
         {
             try
             {
-                var user = _mapper.Map<User>(userDTO);
-                var result = await _userService.UserRegister(user);
+                var result = await _userService.UserRegister(userDTO);
 
                 // Convert model to DTO for result
                 var registeredUserDTO = _mapper.Map<UserDTO>(result);
