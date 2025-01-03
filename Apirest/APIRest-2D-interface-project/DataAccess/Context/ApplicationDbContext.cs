@@ -38,6 +38,11 @@ namespace APIRest_2D_interface_project.DataAccess.Context
                 entity.Property(e => e.IsVerified)
                 .HasDefaultValue(false);
 
+                entity.HasIndex(e => e.Username)
+                .IsUnique();
+
+                entity.HasIndex(e => e.Email)
+                .IsUnique();
             });
         }
     }

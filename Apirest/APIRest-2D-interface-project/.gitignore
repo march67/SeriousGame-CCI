@@ -34,3 +34,7 @@ node_modules/
 # Publication files
 *.pubxml
 *.publishproj
+
+# Migrations
+DataAccess/ApplicationDbContextModelSnapshot.cs
+**/Migrations/*.Snapshot.cs
