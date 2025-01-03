@@ -36,5 +36,4 @@ node_modules/
 *.publishproj
 
 # Migrations
-DataAccess/ApplicationDbContextModelSnapshot.cs
-**/Migrations/*.Snapshot.cs
+**/ApplicationDbContextModelSnapshot.cs
