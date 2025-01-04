@@ -2,8 +2,8 @@
 using APIRest_2D_interface_project.Business.Services.Interfaces;
 using APIRest_2D_interface_project.DataAccess.Repositories.Interfaces;
 using APIRest_2D_interface_project.Infrastructure.Services.Interfaces;
-using APIRest_2D_interface_project.Presentation.DTOs;
 using AutoMapper;
+using APIRest_2D_interface_project.Presentation.DTOs.AuthentificationDTOs.Request;
 
 namespace APIRest_2D_interface_project.Business.Services.Implementations
 {
@@ -20,10 +20,8 @@ namespace APIRest_2D_interface_project.Business.Services.Implementations
             _mapper = mapper;
         }
 
-        public async Task<User> UserRegister(UserDTO userDTO)
+        public async Task<User> UserRegister(User user)
         {
-            var user = _mapper.Map<User>(userDTO);
-            user.PasswordHash = _passwordHashingService.HashPassword(userDTO.Password);
             return await _userRepository.RegisterUser(user);
         }
     }

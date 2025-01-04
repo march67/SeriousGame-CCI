@@ -4,10 +4,11 @@ using APIRest_2D_interface_project.DataAccess.Context;
 using APIRest_2D_interface_project.DataAccess.Repositories.Implementations;
 using APIRest_2D_interface_project.DataAccess.Repositories.Interfaces;
 using APIRest_2D_interface_project.Domain.Entities;
-using APIRest_2D_interface_project.Infrastructure.Mappings;
-using APIRest_2D_interface_project.Infrastructure.Mappings.Profiles;
+using APIRest_2D_interface_project.Infrastructure.Mappings.Resolvers;
 using APIRest_2D_interface_project.Infrastructure.Services.Implementations;
 using APIRest_2D_interface_project.Infrastructure.Services.Interfaces;
+using APIRest_2D_interface_project.Presentation.DTOs.AuthentificationDTOs.Request;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,9 +25,10 @@ builder.Services.AddScoped<User>();
 builder.Services.AddScoped<IPasswordHashingService, PasswordHashingService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IValueResolver<UserRegisterRequestDTO, User, string>, PasswordHashResolver>();
 
 // Mapping Configuration
-builder.Services.AddAutoMapper(typeof(UserMappingProfile));
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 // HTTP Pipeline
 var app = builder.Build();

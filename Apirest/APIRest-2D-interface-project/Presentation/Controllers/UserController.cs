@@ -1,7 +1,8 @@
 ﻿using APIRest_2D_interface_project.Business.Services.Interfaces;
 using APIRest_2D_interface_project.DataAccess.Context;
 using APIRest_2D_interface_project.Domain.Entities;
-using APIRest_2D_interface_project.Presentation.DTOs;
+using APIRest_2D_interface_project.Presentation.DTOs.AuthentificationDTOs.Request;
+using APIRest_2D_interface_project.Presentation.DTOs.AuthentificationDTOs.Response;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,27 +24,33 @@ namespace APIRest_2D_interface_project.Presentation.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserDTO userDTO)
+        public async Task<IActionResult> Register(UserRegisterRequestDTO userRegisterDTO)
         {
             try
             {
-                var result = await _userService.UserRegister(userDTO);
-
-                // Convert model to DTO for result
-                var registeredUserDTO = _mapper.Map<UserDTO>(result);
-
-                // Return with status code 201 Created
-                return CreatedAtAction(
-                    nameof(Register),
-                    new { id = result.Id },
-                    registeredUserDTO
-                );
+                var user = _mapper.Map<User>(userRegisterDTO);
+                var result = await _userService.UserRegister(user);
+                var response = _mapper.Map<UserRegisterResponseDTO>(result);
+                return StatusCode(StatusCodes.Status201Created);
             }
             catch (Exception ex)
             {
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        /* [HttpGet("login")]
+        public async Task<IActionResult> Login(UserLoginDTO userLoginDTO)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        } */
 
     }
 }
