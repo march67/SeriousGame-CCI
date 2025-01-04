@@ -18,6 +18,8 @@ namespace APIRest_2D_interface_project.Infrastructure.Mappings.Profiles
                     option => option.MapFrom<PasswordHashResolver>()
                 );
             CreateMap<User, UserRegisterResponseDTO>();
+
+            CreateMap<UserLoginRequestDTO, User>();
         }
     }
 }

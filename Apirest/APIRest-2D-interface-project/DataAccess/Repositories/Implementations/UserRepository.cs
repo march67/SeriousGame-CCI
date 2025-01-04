@@ -22,5 +22,10 @@ namespace APIRest_2D_interface_project.DataAccess.Repositories.Implementations
             await _context.SaveChangesAsync();
             return user;
         }
+
+        public async Task<User> LoginUser(string username)
+        {
+            await _context.Users.
+        }
     }
 }

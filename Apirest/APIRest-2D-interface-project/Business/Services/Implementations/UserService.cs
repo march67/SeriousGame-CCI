@@ -4,6 +4,7 @@ using APIRest_2D_interface_project.DataAccess.Repositories.Interfaces;
 using APIRest_2D_interface_project.Infrastructure.Services.Interfaces;
 using AutoMapper;
 using APIRest_2D_interface_project.Presentation.DTOs.AuthentificationDTOs.Request;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 
 namespace APIRest_2D_interface_project.Business.Services.Implementations
 {
@@ -23,6 +24,11 @@ namespace APIRest_2D_interface_project.Business.Services.Implementations
         public async Task<User> UserRegister(User user)
         {
             return await _userRepository.RegisterUser(user);
+        }
+
+        public async Task<Boolean> UserLogin(User user)
+        {
+            return await _userRepository.Login(user);
         }
     }
 }

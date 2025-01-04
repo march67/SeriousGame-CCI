@@ -39,18 +39,20 @@ namespace APIRest_2D_interface_project.Presentation.Controllers
             }
         }
 
-        /* [HttpGet("login")]
-        public async Task<IActionResult> Login(UserLoginDTO userLoginDTO)
+       [HttpGet("login")]
+       public async Task<IActionResult> Login(UserLoginRequestDTO userLoginDTO)
         {
             try
             {
-
+                var user = _mapper.Map<User>(userLoginDTO);
+                var result = await _userService.UserLogin(user);
+                return StatusCode(StatusCodes.Status201Created);
             }
             catch (Exception ex)
             {
                 return BadRequest(new { message = ex.Message });
             }
-        } */
+       }
 
     }
 }
