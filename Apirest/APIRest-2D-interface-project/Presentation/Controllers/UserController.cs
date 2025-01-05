@@ -2,7 +2,6 @@
 using APIRest_2D_interface_project.DataAccess.Context;
 using APIRest_2D_interface_project.Domain.Entities;
 using APIRest_2D_interface_project.Presentation.DTOs.AuthentificationDTOs.Request;
-using APIRest_2D_interface_project.Presentation.DTOs.AuthentificationDTOs.Response;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +29,6 @@ namespace APIRest_2D_interface_project.Presentation.Controllers
             {
                 var user = _mapper.Map<User>(userRegisterDTO);
                 var result = await _userService.UserRegister(user);
-                var response = _mapper.Map<UserRegisterResponseDTO>(result);
                 return StatusCode(StatusCodes.Status201Created);
             }
             catch (Exception ex)

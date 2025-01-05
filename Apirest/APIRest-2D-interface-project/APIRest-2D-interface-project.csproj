@@ -23,4 +23,7 @@
   <ItemGroup>
     <Using Include="BCrypt.Net.BCrypt" Alias="BC" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Presentation\DTOs\AuthentificationDTOs\Response\" />
+  </ItemGroup>
 </Project>
