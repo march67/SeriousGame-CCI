@@ -5,6 +5,7 @@ namespace APIRest_2D_interface_project.DataAccess.Repositories.Interfaces
     public interface IUserRepository
     {
        Task<User> RegisterUser(User user);
-       Task<User> LoginUser(String username);
+
+       Task<User> GetUserByUsername(String username);
     }
 }

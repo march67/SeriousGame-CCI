@@ -19,7 +19,11 @@ namespace APIRest_2D_interface_project.Infrastructure.Mappings.Profiles
                 );
             CreateMap<User, UserRegisterResponseDTO>();
 
-            CreateMap<UserLoginRequestDTO, User>();
+            CreateMap<UserLoginRequestDTO, User>()
+                .ForMember(
+                destination => destination.PasswordHash,
+                option => option.MapFrom(src => src.Password)
+            );
         }
     }
 }

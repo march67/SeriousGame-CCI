@@ -46,7 +46,11 @@ namespace APIRest_2D_interface_project.Presentation.Controllers
             {
                 var user = _mapper.Map<User>(userLoginDTO);
                 var result = await _userService.UserLogin(user);
-                return StatusCode(StatusCodes.Status201Created);
+                if (!result)
+                {
+                    return StatusCode(StatusCodes.Status401Unauthorized);
+                }
+                return StatusCode(StatusCodes.Status200OK);
             }
             catch (Exception ex)
             {

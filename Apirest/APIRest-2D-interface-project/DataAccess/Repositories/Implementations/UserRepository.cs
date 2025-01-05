@@ -1,6 +1,7 @@
 ﻿using APIRest_2D_interface_project.DataAccess.Context;
 using APIRest_2D_interface_project.Domain.Entities;
 using APIRest_2D_interface_project.DataAccess.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace APIRest_2D_interface_project.DataAccess.Repositories.Implementations
 {
@@ -23,9 +24,9 @@ namespace APIRest_2D_interface_project.DataAccess.Repositories.Implementations
             return user;
         }
 
-        public async Task<User> LoginUser(string username)
+        public async Task<User> GetUserByUsername(string username)
         {
-            await _context.Users.
+            return await _context.Users.SingleOrDefaultAsync(u => u.Username == username) ?? throw new InvalidOperationException(username);
         }
     }
 }

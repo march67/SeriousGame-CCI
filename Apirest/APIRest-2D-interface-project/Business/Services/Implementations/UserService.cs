@@ -28,7 +28,12 @@ namespace APIRest_2D_interface_project.Business.Services.Implementations
 
         public async Task<Boolean> UserLogin(User user)
         {
-            return await _userRepository.Login(user);
+            var storedUser = await _userRepository.GetUserByUsername(user.Username);
+            if (storedUser == null)
+            {
+                return false;
+            }
+            return _passwordHashingService.VerifyPassword(user.PasswordHash, storedUser.PasswordHash);
         }
     }
 }

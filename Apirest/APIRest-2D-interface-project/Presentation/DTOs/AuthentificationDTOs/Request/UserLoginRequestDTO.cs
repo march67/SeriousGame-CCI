@@ -2,7 +2,7 @@
 
 namespace APIRest_2D_interface_project.Presentation.DTOs.AuthentificationDTOs.Request
 {
-    public class UserLoginDTO
+    public class UserLoginRequestDTO
     {
         [Required(ErrorMessage = "Username is required")]
         public string Username { get; set; }
