@@ -8,8 +8,11 @@
   "ConnectionStrings": {
     "Postgresql": "Server=localhost;Port=9898;Database=something;User Id=something;Password=something;"
   },
-  "ApiSettings": {
-
+  "JwtSettings": {
+	"Secret": "arhfsdoifn1548!sqkofhsqdfiusdqhfiqhfiuqsgbfuqjys154648azopu!kldsqhj",
+	"Issuer": "NotNamedIssuer",
+	"Audience": "NotNamedAudience",
+	"ExpirationMinutes": 60
   },
   "AllowedHosts": "*"
 }
