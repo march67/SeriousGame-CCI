@@ -6,7 +6,7 @@
     }
   },
   "ConnectionStrings": {
-    "Postgresql": "Server=localhost;Port=9898;Database=something;User Id=something;Password=something;"
+    "Postgresql": "Server=localhost;Port=5432;Database=test;User Id=test;Password=test;"
   },
   "JwtSettings": {
 	"Secret": "arhfsdoifn1548!sqkofhsqdfiusdqhfiqhfiuqsgbfuqjys154648azopu!kldsqhj",
