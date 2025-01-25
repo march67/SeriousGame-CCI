@@ -18,7 +18,7 @@ public class SignInManager : MonoBehaviour
 
     private const string SIGN_UP_URL = "https://localhost:7239/User/login";
     private const string STR_SIGN_UP_SCENE = "Scenes/Scene_SignUp";
-    private const string STR_HOME_SCENE = "Scenes/Scene_Invocation";
+    private const string STR_HOME_SCENE = "Scenes/Scene_Main";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
