@@ -47,6 +47,7 @@ public class GameSessionManager : MonoBehaviour
         _jwtToken = jwtToken;
     }
 
+
     public string GetAuthorizationHeader()
     {
         return $"Bearer {_jwtToken}";
