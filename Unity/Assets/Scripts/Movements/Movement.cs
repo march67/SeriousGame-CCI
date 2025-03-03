@@ -4,8 +4,6 @@ public class Movement : MonoBehaviour
 {
     public Sprite spriteFront;
     public Sprite spriteBack;
-    public Sprite spriteLeft;
-    public Sprite spriteRight;
     private SpriteRenderer spriteRenderer;
     public float moveSpeed = 5f;
     private Vector3 targetPosition;
@@ -78,8 +76,8 @@ public class Movement : MonoBehaviour
         }
         else if (input.y < 0)
         {
-            spriteRenderer.sprite = spriteRight;
-            spriteRenderer.flipX = false;
+            spriteRenderer.sprite = spriteFront;
+            spriteRenderer.flipX = true;
         }
     }
 }
