@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f1747d063d8c9994fb5ebab4b17cf47b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - creativity: {fileID: 21300000, guid: 7f55439e757cab244a8288ef2d2e7665, type: 3}
+  - fun: {fileID: 8480595624295078767, guid: e68de4efaf76b73439235c0508a09a62, type: 3}
+  - art: {fileID: -3191882126009140536, guid: d29e0b3239ef61a4188ef1ccd7299311, type: 3}
+  - music: {fileID: 21300000, guid: e8d983425bec9d04fb6ac3ccb5458166, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
