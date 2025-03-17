@@ -12,17 +12,23 @@ public class PlayerStatGeneratorManager : MonoBehaviour
     public Sprite fun;
     public Sprite art;
     public Sprite music;
-
-
     private List<GameObject> players = new List<GameObject>();
     private List<String> stats = new List<String>() { "creativity", "fun", "art", "music" };
     public Sprite[] images; // declare array of 4 images to assign in inspector
     private SpriteRenderer childSpriteRenderer; // reference to the component responsible of displaying the image
 
-    private void Start()
+    private void OnEnable()
     {
-        Debug.Log("PlayerStatGeneratorManager started");
+        EventManager.OnStatGeneration += PlayerGenerateProgression;
+    }
 
+    private void OnDisable()
+    {
+        EventManager.OnStatGeneration -= PlayerGenerateProgression;
+    }
+
+    private void PlayerGenerateProgression()
+    {
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject playerObject in playerObjects)
         {
@@ -32,10 +38,7 @@ public class PlayerStatGeneratorManager : MonoBehaviour
         foreach (GameObject player in players)
         {
             randomStat(player);
-            Debug.Log("randomStat called");
         }
-
-
     }
 
     private void randomStat(GameObject player)
@@ -48,10 +51,9 @@ public class PlayerStatGeneratorManager : MonoBehaviour
             Image imageComponent = imageChild.GetComponent<Image>();
             TextMeshProUGUI textMeshProGUIComponent = textChild.GetComponent<TextMeshProUGUI>();
 
-
             // choose a random stat + random value  to progress + corresponding image to display
             int randomStatIndex = UnityEngine.Random.Range(0, stats.Count);
-            int randomStatValue = UnityEngine.Random.Range(0, 6);
+            int randomStatValue = UnityEngine.Random.Range(1, 6);
             textMeshProGUIComponent.text = "+ " + randomStatValue.ToString();
             string stat = stats[randomStatIndex];
             switch (randomStatIndex)
@@ -70,11 +72,5 @@ public class PlayerStatGeneratorManager : MonoBehaviour
                     break;  
             }
         }
-
-
-
-
-
-
     }
 }
