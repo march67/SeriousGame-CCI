@@ -1,5 +1,8 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovementManager : MonoBehaviour
@@ -8,54 +11,41 @@ public class PlayerMovementManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OnDayEnd += MovePlayerToPosition;
+        EventManager.OnDayEnd += MovePlayersToPosition;
     }
 
     private void OnDisable()
     {
-        EventManager.OnDayEnd -= MovePlayerToPosition;
+        EventManager.OnDayEnd -= MovePlayersToPosition;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void MovePlayersToPosition()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void TeleportPlayerToPosition()
-    {
+        List<GameObject> players = new List<GameObject>();
         Grid grid = FindFirstObjectByType<Grid>();
-        Vector3 gridPosition = grid.CellToWorld(new Vector3Int(-14, 7, 0));
+        Slot slot = new Slot();
 
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player != null)
+
+        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject playerObject in playerObjects)
         {
-            player.transform.position = gridPosition + visualOffset;
-            Debug.Log("Player Moved");
+            players.Add(playerObject);
         }
-    }
 
-    private void MovePlayerToPosition()
-    {
-        Grid grid = FindFirstObjectByType<Grid>();
-        Vector3 gridPosition = grid.CellToWorld(new Vector3Int(-14, 7, 0)) + visualOffset;
-
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player != null)
+        foreach (GameObject player in players)
         {
-            StartCoroutine(MovePlayerSmoothly(player, gridPosition));
+            Vector3Int targetPosition = slot.FindFirstAvailableSlotAndReturnGridPosition();
+            if (targetPosition != Vector3Int.zero)
+            {
+                Vector3 gridPosition = grid.CellToWorld(targetPosition) + visualOffset;
+                StartCoroutine(MovePlayerSmoothly(player, gridPosition));
+            }
         }
     }
 
     private IEnumerator MovePlayerSmoothly(GameObject player, Vector3 targetPosition)
     {
-        float duration = 3.0f; // Durée du déplacement en secondes
+        float duration = 3.0f; // Time deplacement in seconds
         float elapsedTime = 0;
 
         Vector3 startingPosition = player.transform.position;
@@ -67,7 +57,7 @@ public class PlayerMovementManager : MonoBehaviour
             yield return null;
         }
 
-        // S'assurer que le joueur atteint exactement la position cible
+        // Guaranteed that the player reaches final destination
         player.transform.position = targetPosition;
         Debug.Log("Player Moved");
     }
