@@ -79,6 +79,13 @@ namespace APIRest_2D_interface_project.Presentation.Controllers
             return Ok();
         }
 
+        //[HttpGet("getCurrencies")]
+        //public async Task<IActionResult> GetCurrencies()
+        //{
+            
+        //}
+
+
 
     }
 }

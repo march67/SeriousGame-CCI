@@ -12,6 +12,7 @@ namespace APIRest_2D_interface_project.DataAccess.Context
 
         // DbSets definition
         public DbSet<User> Users { get; set; }
+        public DbSet<Player> Players { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,6 +44,26 @@ namespace APIRest_2D_interface_project.DataAccess.Context
 
                 entity.HasIndex(e => e.Email)
                 .IsUnique();
+            });
+
+            // Player
+            modelBuilder.Entity<Player>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.HasOne<User>()
+                .WithOne()
+                .HasForeignKey<Player>(p => p.UserId)
+                .IsRequired();
+
+                entity.Property(e => e.Gems)
+                .HasDefaultValue(0);
+
+                entity.Property(e => e.Gold)
+                .HasDefaultValue(0);
+
+                entity.Property(e => e.Level)
+                .HasDefaultValue(1);
             });
         }
     }
