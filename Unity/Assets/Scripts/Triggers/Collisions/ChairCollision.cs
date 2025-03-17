@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class ChairCollision : MonoBehaviour
 {
+    private Sprite spriteOriginal; // Sprite original avant la collision du personnage 
     public Sprite personnageAssis; // Sprite du personnage assis
     private SpriteRenderer playerRenderer; // Référence au SpriteRenderer du personnage
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -15,8 +17,25 @@ public class ChairCollision : MonoBehaviour
 
             if (playerRenderer != null && personnageAssis != null)
             {
+                // Sauvegarde le sprite original avant de le changer
+                spriteOriginal = playerRenderer.sprite;
+
                 // Change le sprite du personnage pour celui assis
                 playerRenderer.sprite = personnageAssis;
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        // Vérifie si l'objet sortant est le personnage
+        if (other.gameObject.CompareTag("Player"))
+        {
+            // Vérifie que le playerRenderer existe et que le sprite original a été sauvegardé
+            if (playerRenderer != null && spriteOriginal != null)
+            {
+                // Restaure le sprite d'origine
+                playerRenderer.sprite = spriteOriginal;
             }
         }
     }

@@ -7,7 +7,7 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour
 {
     // 1f = 1 seconde
-    private float dayDuration = 10f; // 60 secondes = une journée
+    private float dayDuration = 5f; // 60 secondes = une journée
     private float timeScale = 1f; // multiplicateur de vitesse de jeu, = 0 si arrêt, = 1 si écoulement normal
     private float statGenerationInterval = 5f;
     private float currentDayTime = 0;
