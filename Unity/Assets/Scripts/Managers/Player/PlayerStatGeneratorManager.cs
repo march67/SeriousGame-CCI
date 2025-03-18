@@ -22,12 +22,12 @@ public class PlayerStatGeneratorManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OnStatGeneration += PlayerGenerateProgression;
+        EventManager.AddStatGenerationListener(PlayerGenerateProgression, 0);
     }
 
     private void OnDisable()
     {
-        EventManager.OnStatGeneration -= PlayerGenerateProgression;
+        EventManager.RemoveStatGenerationListener(PlayerGenerateProgression);
     }
 
     private void PlayerGenerateProgression()

@@ -3,22 +3,35 @@ using UnityEngine;
 
 public class StatProgression : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI musicProgression;
-    [SerializeField] private TextMeshProUGUI artProgression;
-    [SerializeField] private TextMeshProUGUI creativityProgression;
-    [SerializeField] private TextMeshProUGUI funProgression;
+    [SerializeField] public TextMeshProUGUI musicProgression;
+    [SerializeField] public TextMeshProUGUI artProgression;
+    [SerializeField] public TextMeshProUGUI creativityProgression;
+    [SerializeField] public TextMeshProUGUI funProgression;
+
+    public int musicProgressionValue;
+    public int artProgressionValue;
+    public int creativityProgressionValue;
+    public int funProgressionValue;
+
+    public int musicProjectGoal = 100;
+    public int artProjectGoal = 100;
+    public int creativityProjectGoal = 100;
+    public int funProjectGoal = 100;
 
     void Start()
     {
-        musicProgression.text = "0 / 0";
-        artProgression.text = "0 / 0";
-        creativityProgression.text = "0 / 0";
-        funProgression.text = "0 / 0";
+        musicProgression.text = musicProgressionValue.ToString() + " / " + musicProjectGoal.ToString();
+        artProgression.text = artProgressionValue.ToString() + " / " + artProjectGoal.ToString();
+        creativityProgression.text = creativityProgressionValue.ToString() + " / " + creativityProjectGoal.ToString();
+        funProgression.text = funProgressionValue.ToString() + " / " + funProjectGoal.ToString();
     }
 
 
     void Update()
     {
-        
+        musicProgression.text = musicProgressionValue.ToString() + " / " + musicProjectGoal.ToString();
+        artProgression.text = artProgressionValue.ToString() + " / " + artProjectGoal.ToString();
+        creativityProgression.text = creativityProgressionValue.ToString() + " / " + creativityProjectGoal.ToString();
+        funProgression.text = funProgressionValue.ToString() + " / " + funProjectGoal.ToString();
     }
 }
