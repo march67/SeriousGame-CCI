@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class Slot : MonoBehaviour
@@ -20,6 +19,17 @@ public class Slot : MonoBehaviour
             slot.isOccupied = status;
         }
     }
+
+    public static void setAllSlotStatusToAvailable()
+    {
+        GameObject slotInstance = new GameObject("Slot");
+        Slot slotComponent = slotInstance.AddComponent<Slot>();
+        List<GameObject> slots = slotComponent.RetrieveAllSlots();
+        foreach (GameObject slot in slots)
+        {
+            slotComponent.setSlotStatus(slot, false);
+        }
+    }
     private List<GameObject> RetrieveAllSlots()
     {
         List<GameObject> slots = new List<GameObject>();
@@ -32,23 +42,17 @@ public class Slot : MonoBehaviour
         return slots;
     }
 
-    public Vector3Int FindFirstAvailableSlotAndReturnGridPosition()
+    public Vector3 FindFirstAvailableSlotAndReturnWorldPosition()
     {
-
         List<GameObject> slotList = RetrieveAllSlots();
-        Grid grid = FindFirstObjectByType<Grid>();
-
         foreach (GameObject slot in slotList)
         {
             if (!isSlotOccupied(slot))
             {
-                Vector3 worldPosition = slot.transform.position;
-                Vector3Int gridPosition = grid.WorldToCell(worldPosition);
                 setSlotStatus(slot, true);
-                return gridPosition;
+                return slot.transform.position;
             }
         }
-
-        return Vector3Int.zero;
+        return Vector3.zero;
     }
 }
