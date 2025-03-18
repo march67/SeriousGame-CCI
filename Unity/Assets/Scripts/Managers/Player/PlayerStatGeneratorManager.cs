@@ -17,6 +17,9 @@ public class PlayerStatGeneratorManager : MonoBehaviour
     public Sprite[] images; // declare array of 4 images to assign in inspector
     private SpriteRenderer childSpriteRenderer; // reference to the component responsible of displaying the image
 
+    int statValueRetrieved;
+    int statGenerated;
+
     private void OnEnable()
     {
         EventManager.OnStatGeneration += PlayerGenerateProgression;
@@ -43,8 +46,13 @@ public class PlayerStatGeneratorManager : MonoBehaviour
 
     private void randomStat(GameObject player)
     {
+        // retrieve the components
         Transform imageChild = player.transform.Find("CNV_PlayerProjectProgression/PNL_PlayerProjectProgression/IMG_PlayerProjectProgression");
         Transform textChild = player.transform.Find("CNV_PlayerProjectProgression/PNL_PlayerProjectProgression/TXT_PlayerProjectProgression");
+
+        // retrieve player's stat
+        PlayerStat playerStat = player.GetComponent<PlayerStat>();
+
         if (imageChild != null && textChild != null)
         {
             // retrieve image and text component of the child
@@ -53,24 +61,35 @@ public class PlayerStatGeneratorManager : MonoBehaviour
 
             // choose a random stat + random value  to progress + corresponding image to display
             int randomStatIndex = UnityEngine.Random.Range(0, stats.Count);
-            int randomStatValue = UnityEngine.Random.Range(1, 6);
-            textMeshProGUIComponent.text = "+ " + randomStatValue.ToString();
-            string stat = stats[randomStatIndex];
+            double randomStatValueMultiplicator = UnityEngine.Random.Range(1.01f, 2.01f); // 1.01 to 2.00 multiplicator
+
             switch (randomStatIndex)
             {
                 case 0:
+                    statValueRetrieved = playerStat.creativityStat;
                     imageComponent.sprite = creativity;
                     break;
                 case 1:
+                    statValueRetrieved = playerStat.funStat;
                     imageComponent.sprite = fun;
                     break;
                 case 2:
+                    statValueRetrieved = playerStat.artStat;
                     imageComponent.sprite = art;
                     break;
                 case 3:
+                    statValueRetrieved = playerStat.musicStat;
                     imageComponent.sprite = music;
                     break;  
             }
+
+            // calculate stat to be generated then display to the UI
+            statGenerated = (int)(Math.Ceiling(randomStatValueMultiplicator * statValueRetrieved));
+            textMeshProGUIComponent.text = "+ " + statGenerated.ToString();
+
+            // test to increase stat
+            string stat = stats[randomStatIndex].ToString();
+            playerStat.increasePlayerTargetedStatByFive(player, stat);
         }
     }
 }

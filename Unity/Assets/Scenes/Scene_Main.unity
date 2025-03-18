@@ -6822,6 +6822,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: artStat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: funStat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: musicStat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: creativityStat
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7550,6 +7566,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: artStat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: funStat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: musicStat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: creativityStat
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7781,7 +7813,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 795820099518839765, guid: 5b1f7c1dff096234287a77ffbebf694d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.40385425
+      value: -1.0961457
       objectReference: {fileID: 0}
     - target: {fileID: 795820099518839765, guid: 5b1f7c1dff096234287a77ffbebf694d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8075,6 +8107,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: artStat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: funStat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: musicStat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: creativityStat
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8125,7 +8173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 795820099518839765, guid: 5b1f7c1dff096234287a77ffbebf694d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.41259086
+      value: -1.0874091
       objectReference: {fileID: 0}
     - target: {fileID: 795820099518839765, guid: 5b1f7c1dff096234287a77ffbebf694d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8269,6 +8317,22 @@ PrefabInstance:
     - target: {fileID: 6478737183313680644, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: artStat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: funStat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: musicStat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733598844220856582, guid: b16167fe4d9c2b24fb388c57068d14c9, type: 3}
+      propertyPath: creativityStat
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

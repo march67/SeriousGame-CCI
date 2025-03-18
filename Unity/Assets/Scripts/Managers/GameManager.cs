@@ -6,6 +6,11 @@ public class GameManager : MonoBehaviour
     public static GameManager instance {  get; private set; }
     public PlayerStatGeneratorManager playerStatGeneratorManager;
 
+    private void OnApplicationQuit()
+    {
+        PlayerStat.saveAllPlayersStat();
+    }
+
     private void Awake()
     {
         if (instance == null)
@@ -17,6 +22,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        PlayerStat.loadAllPlayersStat();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
