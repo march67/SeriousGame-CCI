@@ -14,27 +14,30 @@ public class TimeManager : MonoBehaviour
     private float lastStatGenerationTime = 0;
     private const float epsilon = 0.01f; // error margin, used before condition doesn't work before timer reset
     private bool isDayStarted = false;
-    private bool isPaused = false;
+    public bool isPaused = false;
+    public bool isPausedByDialogue = false;
 
     private static TimeManager instance;
-    public static TimeManager Instance
+
+    public static TimeManager GetInstance()
     {
-        get
-        {
-            if (instance == null)
-            {
-                GameObject gameObject = new GameObject("TimeManager");
-                instance =gameObject.AddComponent<TimeManager>();
-                DontDestroyOnLoad(gameObject);
-            }
-            return instance;
-        }
+        return instance;
     }
+
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("TimeManager instance already exists");
+        }
+        instance = this;
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-        if (isPaused) return;
+        if (isPaused || isPausedByDialogue) return;
 
         currentDayTime += Time.deltaTime * timeScale;
 
@@ -43,15 +46,15 @@ public class TimeManager : MonoBehaviour
         {
             EventManager.StatGeneration();
             lastStatGenerationTime = currentDayTime;
-
-            // test ink story
-            EventManager.DialogueEventTrigger();
         }
         // Beginning of the day
         if (currentDayTime >= 0 && !isDayStarted)
         {
             isDayStarted = true;
             EventManager.DayStart();
+
+            // test ink story
+            EventManager.DialogueEventTrigger();
         }
         // End of the day
         if (currentDayTime >= dayDuration && isDayStarted == true) 
@@ -62,25 +65,45 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    private void ResetTimer(float timer)
-    {
-        timer = 0f;
-    }
-
     private void ResetAllTimersAndPause()
     {
         isPaused = true;
-        StartCoroutine(PauseBetweenDays(3f));
+        StartCoroutine(PauseBetweenDays(5f));
         currentDayTime = 0f;
         lastStatGenerationTime = 0f;
     }
 
+    public void PauseTimerByDialogue()
+    {
+        isPaused = true;
+        isPausedByDialogue = true;
+    }
+
+    public void StartTimerByDialogue()
+    {
+        isPaused = false;
+        isPausedByDialogue = false;
+    }
+
     private IEnumerator PauseBetweenDays(float pauseDuration)
     {
-        float previousTimeScale = timeScale;
-        timeScale = 0f;
-        yield return new WaitForSeconds(pauseDuration);
-        timeScale = previousTimeScale;
+        isPaused = true;
+        float elapsedTime = 0f;
+
+        
+        while (elapsedTime < pauseDuration)
+        {
+            if ( isPausedByDialogue )
+            {
+                Debug.Log($"BetweenDays" + TimeManager.instance.isPausedByDialogue);
+                // Wait until dialogue ended
+                yield return new WaitUntil(() => !isPausedByDialogue);
+            }
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
         isPaused = false;
     }
 }

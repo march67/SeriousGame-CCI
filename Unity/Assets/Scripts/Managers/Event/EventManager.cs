@@ -14,21 +14,16 @@ public class EventManager : MonoBehaviour
     {
         OnDayStart?.Invoke();
         StatGeneration();
-
-        Debug.Log("Day begins");
     }
 
     public static void DayEnd()
     {
         OnDayEnd?.Invoke();
-
-        Debug.Log("Day ends");
     }
 
     public static void DialogueEventTrigger()
     {
         OnDialogueEventTrigger?.Invoke();
-        Debug.Log("Dialogue event triggered");
     }
 
     // Structure handling call order

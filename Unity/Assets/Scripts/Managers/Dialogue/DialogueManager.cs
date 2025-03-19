@@ -1,7 +1,9 @@
 using Ink.Runtime;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -12,9 +14,13 @@ public class DialogueManager : MonoBehaviour
     public bool isDialoguePlaying { get; set; }
     private Story currentStory;
     private TextMeshProUGUI[] choicesText; // track the text for each choice
-    
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public static DialogueManager GetInstance()
+    {
+        return instance;
+    }
+
     void Awake()
     {
         if (instance != null)
@@ -46,23 +52,24 @@ public class DialogueManager : MonoBehaviour
         if (!isDialoguePlaying) { return; }
     }
 
-    public static DialogueManager GetInstance()
-    {
-        return instance;
-    }
 
     public void EnterDialogMode(TextAsset inkJSON)
     {
+        // pause game timer to stop all other events
+        TimeManager.GetInstance().PauseTimerByDialogue();
+
         currentStory = new Story(inkJSON.text);
         dialogPanel.SetActive(true);
         isDialoguePlaying = true;
 
         ContinueStory();
-
     }
 
     private void ExitDialogMode()
     {
+        // start game timer to continue all other events
+        TimeManager.GetInstance().StartTimerByDialogue();
+
         // hide pannel
         dialogPanel.SetActive(false);
         isDialoguePlaying = false;
@@ -106,5 +113,18 @@ public class DialogueManager : MonoBehaviour
         {
             choices[i].gameObject.SetActive(false);
         }
+    }
+
+    public void MakeChoice(int  choiceIndex)
+    {
+        currentStory.ChooseChoiceIndex(choiceIndex);
+        ContinueStory();
+        StartCoroutine(WaitSeconds());
+    }
+
+    private IEnumerator WaitSeconds()
+    {
+        yield return new WaitForSeconds(2);
+        ExitDialogMode();
     }
 }
