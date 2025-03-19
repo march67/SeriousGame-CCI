@@ -20,14 +20,19 @@ public class PlayerStatGeneratorManager : MonoBehaviour
     int statValueRetrieved;
     int statGenerated;
 
+    // ink story test
+    [SerializeField] private TextAsset inkJSON;
+
     private void OnEnable()
     {
         EventManager.AddStatGenerationListener(PlayerGenerateProgression, 0);
+        EventManager.OnDialogueEventTrigger += SendStory;
     }
 
     private void OnDisable()
     {
         EventManager.RemoveStatGenerationListener(PlayerGenerateProgression);
+        EventManager.OnDialogueEventTrigger -= SendStory;
     }
 
     private void PlayerGenerateProgression()
@@ -91,5 +96,10 @@ public class PlayerStatGeneratorManager : MonoBehaviour
             string stat = stats[randomStatIndex].ToString();
             playerStat.increasePlayerTargetedStatByFive(player, stat);
         }
+    }
+
+    private void SendStory()
+    {
+        DialogueManager.GetInstance().EnterDialogMode(inkJSON);
     }
 }

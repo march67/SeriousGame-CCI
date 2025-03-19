@@ -8,6 +8,7 @@ public class EventManager : MonoBehaviour
 {
     public static event Action OnDayStart;
     public static event Action OnDayEnd;
+    public static event Action OnDialogueEventTrigger;
 
     public static void DayStart()
     {
@@ -22,6 +23,12 @@ public class EventManager : MonoBehaviour
         OnDayEnd?.Invoke();
 
         Debug.Log("Day ends");
+    }
+
+    public static void DialogueEventTrigger()
+    {
+        OnDialogueEventTrigger?.Invoke();
+        Debug.Log("Dialogue event triggered");
     }
 
     // Structure handling call order

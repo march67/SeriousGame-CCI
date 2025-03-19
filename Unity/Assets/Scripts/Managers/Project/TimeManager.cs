@@ -43,6 +43,9 @@ public class TimeManager : MonoBehaviour
         {
             EventManager.StatGeneration();
             lastStatGenerationTime = currentDayTime;
+
+            // test ink story
+            EventManager.DialogueEventTrigger();
         }
         // Beginning of the day
         if (currentDayTime >= 0 && !isDayStarted)
