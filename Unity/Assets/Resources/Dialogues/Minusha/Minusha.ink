@@ -14,22 +14,21 @@ Minusha0 ?
         -> chosen4
         
 === chosen1 ===
-Choosen 1
--> final("10")
+decreaseAllPlayersAllStatsBy50 - text
+-> final("decreaseAllPlayersAllStatsBy50")
 
 === chosen2 ===
-Choosen 2
--> final("20")
+decreaseAllPlayersAllStatsBy50 - text
+-> final("decreaseAllPlayersAllStatsBy50")
 
 === chosen3 ===
-Choosen 3
--> final("30")
+increaseAllPlayersAllStatsBy100 - text
+-> final("increaseAllPlayersAllStatsBy100")
 
 === chosen4 ===
-Choosen 4
--> final("40")
+increaseAllPlayersAllStatsBy100 - text
+-> final("increaseAllPlayersAllStatsBy100")
 
 === final(value) ===
-VAR nb = 600
-~ pokemon_name = value
+~ functionToCall = value
 -> END

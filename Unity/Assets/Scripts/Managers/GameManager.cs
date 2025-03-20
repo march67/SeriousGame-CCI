@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        PlayerStat.saveAllPlayersStat();
+        PlayerStatManager.GetInstance().saveAllPlayersStat();
     }
 
     private void Awake()
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        PlayerStat.loadAllPlayersStat();
+        PlayerStatManager.GetInstance().loadAllPlayersStat();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        // Instancier le PlayerStatGeneratorManager s'il n'existe pas déjà
+        // Instanciate PlayerStatGeneratorManager if doesn't exist yet
         if (playerStatGeneratorManager == null)
         {
             playerStatGeneratorManager = GetComponent<PlayerStatGeneratorManager>();

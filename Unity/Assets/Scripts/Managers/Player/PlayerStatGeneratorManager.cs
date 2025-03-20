@@ -24,6 +24,8 @@ public class PlayerStatGeneratorManager : MonoBehaviour
 
     private void Start()
     {
+        PlayerStatManager.GetInstance().increaseAllPlayersAllStatsBy100();
+        PlayerStatManager.GetInstance().decreaseAllPlayersAllStatsBy50();
     }
 
     private void OnEnable()
@@ -94,6 +96,10 @@ public class PlayerStatGeneratorManager : MonoBehaviour
             // calculate stat to be generated then display to the UI
             statGenerated = (int)(Math.Ceiling(randomStatValueMultiplicator * statValueRetrieved));
             textMeshProGUIComponent.text = "+ " + statGenerated.ToString();
+
+            // test
+            string stat = stats[randomStatIndex].ToString();
+            PlayerStatManager.GetInstance().increasePlayerTargetedStatByFive(player, stat);
         }
     }
 

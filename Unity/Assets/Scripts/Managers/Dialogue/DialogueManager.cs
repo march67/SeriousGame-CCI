@@ -137,8 +137,7 @@ public class DialogueManager : MonoBehaviour
     {
         currentStory.ChooseChoiceIndex(choiceIndex);
         ContinueStory();
-        // Pour récupérer une variable Ink
-        var choixEffectue = currentStory.state;
+        dialogueVariables.TriggerDialogueEffect();
 
         StartCoroutine(WaitSeconds());
     }
@@ -160,4 +159,6 @@ public class DialogueManager : MonoBehaviour
         }
         return variableValue;
     }
+
+
 }
