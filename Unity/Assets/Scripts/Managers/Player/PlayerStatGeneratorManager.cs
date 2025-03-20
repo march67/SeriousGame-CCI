@@ -94,19 +94,20 @@ public class PlayerStatGeneratorManager : MonoBehaviour
             // calculate stat to be generated then display to the UI
             statGenerated = (int)(Math.Ceiling(randomStatValueMultiplicator * statValueRetrieved));
             textMeshProGUIComponent.text = "+ " + statGenerated.ToString();
-
-            // test to increase stat
-            string stat = stats[randomStatIndex].ToString();
-            playerStat.increasePlayerTargetedStatByFive(player, stat);
         }
     }
 
     private void SendRandomStory()
     {
         int randomIndexCharacter = Random.Range(0, 4);
-        TextAsset[] textAssets = TextAssetPoolManager.GetInstance().GetTextAssetsFromSpecificPool(randomIndexCharacter);
-        int randomIndexStory = Random.Range(0, textAssets.Length);
-        TextAsset story = textAssets[randomIndexStory];
-        DialogueManager.GetInstance().EnterDialogMode(story);
+        //TextAsset[] textAssets = TextAssetPoolManager.GetInstance().GetTextAssetsFromSpecificPool(randomIndexCharacter);
+        //int randomIndexStory = Random.Range(0, textAssets.Length);
+        //TextAsset story = textAssets[randomIndexStory];
+
+        // forcing minusha0 assettext
+        TextAsset[] textAssets2 = TextAssetPoolManager.GetInstance().GetTextAssetsFromSpecificPool(3);
+        TextAsset story2 = textAssets2[0];
+
+        DialogueManager.GetInstance().EnterDialogMode(story2);
     }
 }

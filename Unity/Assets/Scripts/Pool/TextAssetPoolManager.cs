@@ -168,6 +168,10 @@ public class TextAssetPoolManager : MonoBehaviour
             case 3:
                 folderAssets = folder4Assets;
                 break;
+            default:
+                Debug.Log("pool number not handled");
+                break;
+
         }
 
         foreach (var asset in folderAssets.Values)

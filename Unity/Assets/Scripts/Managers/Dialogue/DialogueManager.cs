@@ -1,4 +1,7 @@
+using Ink.Parsed;
 using Ink.Runtime;
+using Ink.UnityIntegration;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,8 +15,12 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private GameObject[] choices;
     public bool isDialoguePlaying { get; set; }
-    private Story currentStory;
+    private Ink.Runtime.Story currentStory;
     private TextMeshProUGUI[] choicesText; // track the text for each choice
+
+    // handling variables change
+    private DialogueVariables dialogueVariables;
+    [SerializeField] private InkFile globalsInkFile;
 
 
     public static DialogueManager GetInstance()
@@ -30,6 +37,8 @@ public class DialogueManager : MonoBehaviour
         }
 
         instance = this;
+
+        dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
     }
 
 
@@ -61,9 +70,12 @@ public class DialogueManager : MonoBehaviour
         // pause game timer to stop all other events
         TimeManager.GetInstance().PauseTimerByDialogue();
 
-        currentStory = new Story(inkJSON.text);
+        currentStory = new Ink.Runtime.Story(inkJSON.text);
         dialogPanel.SetActive(true);
         isDialoguePlaying = true;
+
+        // listen for variable change
+        dialogueVariables.StartListening(currentStory);
 
         ContinueStory();
     }
@@ -72,6 +84,9 @@ public class DialogueManager : MonoBehaviour
     {
         // start game timer to continue all other events
         TimeManager.GetInstance().StartTimerByDialogue();
+
+        // stop listening for variable change
+        dialogueVariables.StopListening(currentStory);
 
         // hide pannel
         dialogPanel.SetActive(false);
@@ -96,7 +111,7 @@ public class DialogueManager : MonoBehaviour
 
     private void DisplayChoices()
     {
-        List<Choice> currentChoices = currentStory.currentChoices;
+        List<Ink.Runtime.Choice> currentChoices = currentStory.currentChoices;
         if (currentChoices.Count > choices.Length)
         {
             Debug.LogError("More choices were given than the UI can support. Number of choices given " + currentChoices.Count);
@@ -104,7 +119,7 @@ public class DialogueManager : MonoBehaviour
 
         int index = 0;
         // enable and initialize the choices up to the amount of choices for this line of dialogue
-        foreach(Choice choice in currentChoices)
+        foreach(Ink.Runtime.Choice choice in currentChoices)
         {
             choices[index].gameObject.SetActive(true);
             choicesText[index].text = choice.text;
@@ -122,6 +137,9 @@ public class DialogueManager : MonoBehaviour
     {
         currentStory.ChooseChoiceIndex(choiceIndex);
         ContinueStory();
+        // Pour récupérer une variable Ink
+        var choixEffectue = currentStory.state;
+
         StartCoroutine(WaitSeconds());
     }
 
@@ -129,5 +147,17 @@ public class DialogueManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         ExitDialogMode();
+    }
+
+    // Get the value of a specific ink variable
+    public Ink.Runtime.Object GetVariableState(string variableName)
+    {
+        Ink.Runtime.Object variableValue = null;
+        dialogueVariables.variables.TryGetValue(variableName, out variableValue);
+        if (variableValue == null)
+        {
+            Debug.LogWarning("Ink variable was found to be null " +  variableName);
+        }
+        return variableValue;
     }
 }
