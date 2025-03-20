@@ -43,45 +43,10 @@ public class TextAssetPoolManager : MonoBehaviour
         instance = this;
 
         // Load text assets from each folder
-        LoadTextAssets(folder1Path, folder1Assets);
-        LoadTextAssets(folder2Path, folder2Assets);
-        LoadTextAssets(folder3Path, folder3Assets);
-        LoadTextAssets(folder4Path, folder4Assets);
+        LoadAllTextAssets();
 
         // Initialize pools
-        // initialize pool 1 with all assets of folder 1
-        pool1 = new ObjectPool<TextAsset>(
-            createFunc: () => CreateTextAsset(folder1Assets),
-            actionOnGet: OnGetFromPool,
-            actionOnRelease: OnReleaseToPool,
-            actionOnDestroy: OnDestroyPooledObject,
-            defaultCapacity: defaultCapacity,
-            maxSize: defaultMaxSize
-        );
-        pool2 = new ObjectPool<TextAsset>(
-            createFunc: () => CreateTextAsset(folder2Assets),
-            actionOnGet: OnGetFromPool,
-            actionOnRelease: OnReleaseToPool,
-            actionOnDestroy: OnDestroyPooledObject,
-            defaultCapacity: defaultCapacity,
-            maxSize: defaultMaxSize
-        );
-        pool3 = new ObjectPool<TextAsset>(
-            createFunc: () => CreateTextAsset(folder3Assets),
-            actionOnGet: OnGetFromPool,
-            actionOnRelease: OnReleaseToPool,
-            actionOnDestroy: OnDestroyPooledObject,
-            defaultCapacity: defaultCapacity,
-            maxSize: defaultMaxSize
-        );
-        pool4 = new ObjectPool<TextAsset>(
-            createFunc: () => CreateTextAsset(folder4Assets),
-            actionOnGet: OnGetFromPool,
-            actionOnRelease: OnReleaseToPool,
-            actionOnDestroy: OnDestroyPooledObject,
-            defaultCapacity: defaultCapacity,
-            maxSize: defaultMaxSize
-        );
+        InitializeAllPools();
     }
 
     private void Start()
@@ -120,6 +85,51 @@ public class TextAssetPoolManager : MonoBehaviour
         }
     }
 
+    private void InitializeAllPools()
+    {
+        pool1 = new ObjectPool<TextAsset>(
+            createFunc: () => CreateTextAsset(folder1Assets),
+            actionOnGet: OnGetFromPool,
+            actionOnRelease: OnReleaseToPool,
+            actionOnDestroy: OnDestroyPooledObject,
+            defaultCapacity: defaultCapacity,
+            maxSize: defaultMaxSize
+        );
+
+        pool2 = new ObjectPool<TextAsset>(
+            createFunc: () => CreateTextAsset(folder2Assets),
+            actionOnGet: OnGetFromPool,
+            actionOnRelease: OnReleaseToPool,
+            actionOnDestroy: OnDestroyPooledObject,
+            defaultCapacity: defaultCapacity,
+            maxSize: defaultMaxSize
+        );
+        pool3 = new ObjectPool<TextAsset>(
+            createFunc: () => CreateTextAsset(folder3Assets),
+            actionOnGet: OnGetFromPool,
+            actionOnRelease: OnReleaseToPool,
+            actionOnDestroy: OnDestroyPooledObject,
+            defaultCapacity: defaultCapacity,
+            maxSize: defaultMaxSize
+        );
+        pool4 = new ObjectPool<TextAsset>(
+            createFunc: () => CreateTextAsset(folder4Assets),
+            actionOnGet: OnGetFromPool,
+            actionOnRelease: OnReleaseToPool,
+            actionOnDestroy: OnDestroyPooledObject,
+            defaultCapacity: defaultCapacity,
+            maxSize: defaultMaxSize
+        );
+    }
+
+    private void LoadAllTextAssets()
+    {
+        LoadTextAssets(folder1Path, folder1Assets);
+        LoadTextAssets(folder2Path, folder2Assets);
+        LoadTextAssets(folder3Path, folder3Assets);
+        LoadTextAssets(folder4Path, folder4Assets);
+    }
+
     private void OnGetFromPool(TextAsset asset)
     {
         // Method executed to handle logic when a TextAsset is retrieved from the pool
@@ -138,24 +148,31 @@ public class TextAssetPoolManager : MonoBehaviour
         Debug.Log($"TextAsset {asset.name} détruit");
     }
 
-    // Method to obtain a specific TextAsset from a pool 1
-    public TextAsset GetTextAssetFromPool1(string assetName)
-    {
-        if (folder1Assets.TryGetValue(assetName, out TextAsset asset))
-        {
-            return pool1.Get();
-        }
-        return null;
-    }
-
     // Method to obtain all TextAssets from a pool 1
-    public TextAsset[] GetTextAssetsFromPool1()
+    public TextAsset[] GetTextAssetsFromSpecificPool(int index)
     {
         List<TextAsset> textAssets = new List<TextAsset>();
-        foreach (var asset in folder1Assets.Values)
+        Dictionary<string, TextAsset> folderAssets = new Dictionary<string, TextAsset>();
+        // Specific pool between pool 0 and pool 3
+        switch (index)
+        {
+            case 0:
+                folderAssets = folder1Assets;
+                break;
+            case 1:
+                folderAssets = folder2Assets;
+                break;
+            case 2:
+                folderAssets = folder3Assets;
+                break;
+            case 3:
+                folderAssets = folder4Assets;
+                break;
+        }
+
+        foreach (var asset in folderAssets.Values)
         {
             textAssets.Add(asset);
-            // Normally pool.Get() method that executes OnGetFromPool for specific logic
         }
 
         return textAssets.ToArray();

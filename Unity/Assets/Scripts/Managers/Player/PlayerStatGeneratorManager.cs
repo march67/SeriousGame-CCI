@@ -103,9 +103,10 @@ public class PlayerStatGeneratorManager : MonoBehaviour
 
     private void SendRandomStory()
     {
-        TextAsset[] textAssets = TextAssetPoolManager.GetInstance().GetTextAssetsFromPool1();
-        int randomIndex = Random.Range(0, textAssets.Length);
-        TextAsset inkJSONFromPool = textAssets[randomIndex];
-        DialogueManager.GetInstance().EnterDialogMode(inkJSONFromPool);
+        int randomIndexCharacter = Random.Range(0, 4);
+        TextAsset[] textAssets = TextAssetPoolManager.GetInstance().GetTextAssetsFromSpecificPool(randomIndexCharacter);
+        int randomIndexStory = Random.Range(0, textAssets.Length);
+        TextAsset story = textAssets[randomIndexStory];
+        DialogueManager.GetInstance().EnterDialogMode(story);
     }
 }
