@@ -2,8 +2,10 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PlayerStatGeneratorManager : MonoBehaviour
 {
@@ -20,19 +22,20 @@ public class PlayerStatGeneratorManager : MonoBehaviour
     int statValueRetrieved;
     int statGenerated;
 
-    // ink story test
-    [SerializeField] private TextAsset inkJSON;
+    private void Start()
+    {
+    }
 
     private void OnEnable()
     {
         EventManager.AddStatGenerationListener(PlayerGenerateProgression, 0);
-        EventManager.OnDialogueEventTrigger += SendStory;
+        EventManager.OnDialogueEventTrigger += SendRandomStory;
     }
 
     private void OnDisable()
     {
         EventManager.RemoveStatGenerationListener(PlayerGenerateProgression);
-        EventManager.OnDialogueEventTrigger -= SendStory;
+        EventManager.OnDialogueEventTrigger -= SendRandomStory;
     }
 
     private void PlayerGenerateProgression()
@@ -98,8 +101,11 @@ public class PlayerStatGeneratorManager : MonoBehaviour
         }
     }
 
-    private void SendStory()
+    private void SendRandomStory()
     {
-        DialogueManager.GetInstance().EnterDialogMode(inkJSON);
+        TextAsset[] textAssets = TextAssetPoolManager.GetInstance().GetTextAssetsFromPool1();
+        int randomIndex = Random.Range(0, textAssets.Length);
+        TextAsset inkJSONFromPool = textAssets[randomIndex];
+        DialogueManager.GetInstance().EnterDialogMode(inkJSONFromPool);
     }
 }

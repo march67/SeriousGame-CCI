@@ -1,7 +1,7 @@
 -> main
 
 === main ===
-Which pokemon ?
+Stephane0 ?
     + [Charmander]
         -> chosen("Charmander")
     + [Charmander]

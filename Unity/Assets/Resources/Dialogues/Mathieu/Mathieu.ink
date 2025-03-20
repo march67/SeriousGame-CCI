@@ -2,7 +2,7 @@
 
 
 === main ===
-Mathieu a commis une faute grave sur le dépôt git, ce qui a allongé le temps de déploiement de deux jours. Il semble comprendre les conséquences de sa faute, mais sans en être préoccupé.
+Mathieu0 a commis une faute grave sur le dépôt git, ce qui a allongé le temps de déploiement de deux jours. Il semble comprendre les conséquences de sa faute, mais sans en être préoccupé.
     + [Le sermonner pour lui faire comprendre qu'il ne doit plus faire cette erreur]
         -> choix("1")
     

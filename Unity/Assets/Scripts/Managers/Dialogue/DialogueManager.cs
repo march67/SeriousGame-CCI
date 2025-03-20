@@ -23,12 +23,15 @@ public class DialogueManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance != null)
+        if (instance != null && instance != this)
         {
             Debug.LogWarning("Dialog instance already exists");
+            return;
         }
+
         instance = this;
     }
+
 
     private void Start()
     {
