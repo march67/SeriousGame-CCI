@@ -5,17 +5,39 @@ using UnityEngine.UI;
 
 public class ProjectManager : MonoBehaviour
 {
+    private static ProjectManager instance;
     private int progressionValue;
     public StatProgression statProgression;
+
+    public int deadlineTimeInDays { private get; set; }
+    public int deadlineTimeInDaysLeft { get; private set; }
+
+    public static ProjectManager GetInstance()
+    {
+        return instance;
+    }
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            return;
+        }
+
+        instance = this;
+        deadlineTimeInDaysLeft = 0;
+    }
 
     private void OnEnable()
     {
         EventManager.AddStatGenerationListener(UpdateProjectUI, 1);
+        EventManager.OnDayEnd += UpdateProjectDeadLine;
     }
 
     private void OnDisable()
     {
         EventManager.RemoveStatGenerationListener(UpdateProjectUI);
+        EventManager.OnDayEnd -= UpdateProjectDeadLine;
     }
 
 
@@ -55,6 +77,21 @@ public class ProjectManager : MonoBehaviour
                     statProgression.musicProgressionValue += progressionValue;
                 }
             }
+        }
+    }
+
+    private void UpdateProjectDeadLine()
+    {
+        // at the beginning deadlineTimeLeft is equal to deadlineTime
+        if (deadlineTimeInDaysLeft == 0 )
+        {
+            deadlineTimeInDaysLeft = deadlineTimeInDays;
+        }
+
+        // each day passed, decrease the deadlineTimeLeft by one
+        if ( deadlineTimeInDaysLeft > 0 )
+        {
+            deadlineTimeInDaysLeft -= 1;
         }
     }
 }

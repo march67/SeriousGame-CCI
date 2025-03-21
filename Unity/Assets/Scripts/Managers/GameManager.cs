@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
         }
 
         PlayerStatManager.GetInstance().loadAllPlayersStat();
+        ProjectManager.GetInstance().deadlineTimeInDays = 10; // initialize first project deadlineTimeInDays
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

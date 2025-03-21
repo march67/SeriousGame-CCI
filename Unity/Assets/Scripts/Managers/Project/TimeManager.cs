@@ -7,7 +7,7 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour
 {
     // 1f = 1 seconde
-    private float dayDuration = 10f; // 60 seconds = one day
+    private float dayDuration = 10f; // x seconds = one day
     private float timeScale = 1f; // game speed multiplicator, = 0 if on stop, = 1 if normal speed / timer resumption
     private float statGenerationInterval = 5f;
     private float currentDayTime = 0;
@@ -41,7 +41,7 @@ public class TimeManager : MonoBehaviour
 
         currentDayTime += Time.deltaTime * timeScale;
 
-        // Stat generation
+        // Stat generation interval
         if (currentDayTime - lastStatGenerationTime >= statGenerationInterval - epsilon)
         {
             EventManager.StatGeneration();
