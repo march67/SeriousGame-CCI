@@ -20,11 +20,9 @@ public class PlayerMovementManager : MonoBehaviour
 
     private void MovePlayersToSlot()
     {
-        Chair.setAllChairStatusToAvailable(); // leaving the chair to go to the slot
+        ChairManager.GetInstance().setAllChairStatusToAvailable(); // leaving the chair to go to the slot
         List<GameObject> players = new List<GameObject>();
         Grid grid = FindFirstObjectByType<Grid>();
-        GameObject slotObject = new GameObject("Slot");
-        Slot slotComponent = slotObject.AddComponent<Slot>();
 
 
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
@@ -35,7 +33,7 @@ public class PlayerMovementManager : MonoBehaviour
 
         foreach (GameObject player in players)
         {
-            Vector3 targetWorldPositionWithPivotOffset = slotComponent.FindFirstAvailableSlotAndReturnWorldPosition() + new Vector3(0, 0.75f, 0);
+            Vector3 targetWorldPositionWithPivotOffset = SlotManager.GetInstance().FindFirstAvailableSlotAndReturnWorldPosition() + new Vector3(0, 0.75f, 0);
             if (targetWorldPositionWithPivotOffset != Vector3Int.zero)
             {
                 StartCoroutine(MovePlayerSmoothly(player, targetWorldPositionWithPivotOffset));
@@ -44,12 +42,9 @@ public class PlayerMovementManager : MonoBehaviour
     }
     private void MovePlayersToChair()
     {
-        Slot.setAllSlotStatusToAvailable(); // leaving the slot to go to the chair
+        SlotManager.GetInstance().setAllSlotStatusToAvailable(); // leaving the slot to go to the chair
         List<GameObject> players = new List<GameObject>();
         Grid grid = FindFirstObjectByType<Grid>();
-        GameObject chairObject = new GameObject("Chair");
-        Chair chairComponent = chairObject.AddComponent<Chair>();
-
 
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject playerObject in playerObjects)
@@ -59,7 +54,7 @@ public class PlayerMovementManager : MonoBehaviour
 
         foreach (GameObject player in players)
         {
-            Vector3 targetWorldPositionWithPivotOffset = chairComponent.FindFirstAvailableChairAndReturnWorldPosition() + new Vector3(0, 0.25f, 0);
+            Vector3 targetWorldPositionWithPivotOffset = ChairManager.GetInstance().FindFirstAvailableChairAndReturnWorldPosition() + new Vector3(0, 0.25f, 0);
             if (targetWorldPositionWithPivotOffset != Vector3Int.zero)
             {
                 StartCoroutine(MovePlayerSmoothly(player, targetWorldPositionWithPivotOffset));
