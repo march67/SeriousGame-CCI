@@ -4,12 +4,12 @@ public class GameInformationUI : MonoBehaviour
 {
     private void OnEnable()
     {
-        EventManager.OnDayEnd += UpdateDeadlineDisplay;
+        EventManager.AddListener(EventManager.EventType.DayEnd, UpdateDeadlineDisplay, 1);
     }
 
     private void OnDisable()
     {
-        EventManager.OnDayEnd -= UpdateDeadlineDisplay;
+        EventManager.RemoveListener(EventManager.EventType.DayEnd,UpdateDeadlineDisplay);
     }
 
     private void UpdateDeadlineDisplay()

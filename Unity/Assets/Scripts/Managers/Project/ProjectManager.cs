@@ -30,14 +30,14 @@ public class ProjectManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.AddStatGenerationListener(UpdateProjectUI, 1);
-        EventManager.OnDayEnd += UpdateProjectDeadLine;
+        EventManager.AddListener(EventManager.EventType.StatGeneration, UpdateProjectUI, 1);
+        EventManager.AddListener(EventManager.EventType.DayEnd, UpdateProjectDeadLine, 0);
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveStatGenerationListener(UpdateProjectUI);
-        EventManager.OnDayEnd -= UpdateProjectDeadLine;
+        EventManager.RemoveListener(EventManager.EventType.StatGeneration, UpdateProjectUI);
+        EventManager.RemoveListener(EventManager.EventType.DayEnd, UpdateProjectDeadLine);
     }
 
 

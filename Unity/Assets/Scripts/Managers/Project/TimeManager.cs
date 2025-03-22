@@ -44,23 +44,24 @@ public class TimeManager : MonoBehaviour
         // Stat generation interval
         if (currentDayTime - lastStatGenerationTime >= statGenerationInterval - epsilon)
         {
-            EventManager.StatGeneration();
+            EventManager.TriggerEvent(EventManager.EventType.StatGeneration);
             lastStatGenerationTime = currentDayTime;
         }
         // Beginning of the day
         if (currentDayTime >= 0 && !isDayStarted)
         {
             isDayStarted = true;
-            EventManager.DayStart();
+            EventManager.TriggerEvent(EventManager.EventType.DayStart);
 
             // test ink story
-            EventManager.DialogueEventTrigger();
+            EventManager.TriggerEvent(EventManager.EventType.EnterDialogue);
         }
         // End of the day
         if (currentDayTime >= dayDuration && isDayStarted == true) 
         {
             isDayStarted = false;
-            EventManager.DayEnd();
+            //EventManager.DayEnd();
+            EventManager.TriggerEvent(EventManager.EventType.DayEnd);
             ResetAllTimersAndPause();
         }
     }

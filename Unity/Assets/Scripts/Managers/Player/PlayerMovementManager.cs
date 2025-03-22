@@ -8,14 +8,14 @@ public class PlayerMovementManager : MonoBehaviour
 {
     private void OnEnable()
     {
-        EventManager.OnDayEnd += MovePlayersToSlot;
-        EventManager.OnDayStart += MovePlayersToChair;
+        EventManager.AddListener(EventManager.EventType.DayEnd, MovePlayersToSlot, 100);
+        EventManager.AddListener(EventManager.EventType.DayStart, MovePlayersToChair, 100);
     }
 
     private void OnDisable()
     {
-        EventManager.OnDayEnd -= MovePlayersToSlot;
-        EventManager.OnDayStart -= MovePlayersToChair;
+        EventManager.RemoveListener(EventManager.EventType.DayEnd, MovePlayersToSlot);
+        EventManager.RemoveListener(EventManager.EventType.DayStart, MovePlayersToChair);
     }
 
     private void MovePlayersToSlot()

@@ -30,14 +30,13 @@ public class PlayerStatGeneratorManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.AddStatGenerationListener(PlayerGenerateProgression, 0);
-        EventManager.OnDialogueEventTrigger += SendRandomStory;
+        EventManager.AddListener(EventManager.EventType.StatGeneration, PlayerGenerateProgression, 0);
+        EventManager.AddListener(EventManager.EventType.EnterDialogue, SendRandomStory, 0);
     }
-
     private void OnDisable()
     {
-        EventManager.RemoveStatGenerationListener(PlayerGenerateProgression);
-        EventManager.OnDialogueEventTrigger -= SendRandomStory;
+        EventManager.RemoveListener(EventManager.EventType.StatGeneration, PlayerGenerateProgression);
+        EventManager.RemoveListener(EventManager.EventType.EnterDialogue, SendRandomStory);
     }
 
     private void PlayerGenerateProgression()
