@@ -78,6 +78,5 @@ public class PlayerMovementManager : MonoBehaviour
 
         // Guarante that the player reaches final destination
         player.transform.position = targetWorldPosition;
-        Debug.Log("Player Moved");
     }
 }

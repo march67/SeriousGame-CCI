@@ -60,7 +60,6 @@ public class TimeManager : MonoBehaviour
         if (currentDayTime >= dayDuration && isDayStarted == true) 
         {
             isDayStarted = false;
-            //EventManager.DayEnd();
             EventManager.TriggerEvent(EventManager.EventType.DayEnd);
             ResetAllTimersAndPause();
         }

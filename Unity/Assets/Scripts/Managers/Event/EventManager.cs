@@ -18,13 +18,7 @@ public class EventManager : MonoBehaviour
         DayStart,
         StatGeneration,
         EnterDialogue,
-    }
-
-    public static event Action OnDialogueEventTrigger;
-
-    public static void DialogueEventTrigger()
-    {
-        OnDialogueEventTrigger?.Invoke();
+        BudgetChange,
     }
 
     public static void AddListener(EventType eventType, Action callback, int priority = 0)

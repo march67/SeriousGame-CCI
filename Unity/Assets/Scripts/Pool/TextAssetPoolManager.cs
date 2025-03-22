@@ -81,7 +81,7 @@ public class TextAssetPoolManager : MonoBehaviour
         foreach (TextAsset asset in textAssets)
         {
             targetedFolderAssets[asset.name] = asset;
-            Debug.Log($"Chargé: {asset.name} depuis {folderPath}");
+            Debug.Log($"Folder for inky stories: {asset.name} charged from relative path {folderPath}");
         }
     }
 
