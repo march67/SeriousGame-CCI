@@ -10,12 +10,10 @@ public class DialogueVariables : ScriptableObject
     public Dictionary<string, Ink.Runtime.Object> variables { get; private set; }
 
     private Dictionary<string, Action> functionMap;
-    public DialogueVariables(string globalsFilePath)
+    //public DialogueVariables(string globalsFilePath)
+    public DialogueVariables(TextAsset globalsFile)
     {
-        // compile the story
-        string inkFileContents = File.ReadAllText(globalsFilePath);
-        Ink.Compiler compiler = new Ink.Compiler(inkFileContents);
-        Story globalVariablesStory = compiler.Compile();
+        Story globalVariablesStory = new Ink.Runtime.Story(globalsFile.text);
 
         // initialize the dictionary
         variables = new Dictionary<string, Ink.Runtime.Object>();

@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+#if UNITY_EDITOR
 using UnityEditor.UIElements;
+#endif
 using System.Collections.Generic;
 
 public class EventManager : MonoBehaviour

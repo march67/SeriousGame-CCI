@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+#if UNITY_EDITOR
 using UnityEditor.EditorTools;
+#endif
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;

@@ -1,6 +1,10 @@
 using Ink.Parsed;
 using Ink.Runtime;
+
+#if UNITY_EDITOR
 using Ink.UnityIntegration;
+#endif
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +24,12 @@ public class DialogueManager : MonoBehaviour
 
     // handling variables change
     private DialogueVariables dialogueVariables;
-    [SerializeField] private InkFile globalsInkFile;
+
+
+    //[SerializeField] private InkFile globalsInkFile;
+
+    [SerializeField] private TextAsset globalsJsonAsset;
+
 
 
     public static DialogueManager GetInstance()
@@ -37,8 +46,12 @@ public class DialogueManager : MonoBehaviour
         }
 
         instance = this;
+    
+        //dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
+     
+        dialogueVariables = new DialogueVariables(globalsJsonAsset);
+        Debug.Log("");
 
-        dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
     }
 
 
