@@ -1,10 +1,29 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameInformationUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI DeadLineText;
     [SerializeField] private TextMeshProUGUI BudgetText;
+
+    private static GameInformationUI instance;
+
+    public static GameInformationUI GetInstance()
+    {
+        return instance;
+    }
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            return;
+        }
+
+        instance = this;
+    }
+
     private void OnEnable()
     {
         EventManager.AddListener(EventManager.EventType.DayEnd, UpdateDeadlineDisplay, 1);
@@ -15,7 +34,7 @@ public class GameInformationUI : MonoBehaviour
         EventManager.RemoveListener(EventManager.EventType.DayEnd,UpdateDeadlineDisplay);
     }
 
-    private void UpdateDeadlineDisplay()
+    public void UpdateDeadlineDisplay()
     {
         // retrieve remaining days and format
         int deadlineTimeInDaysLeft = ProjectManager.GetInstance().deadlineTimeInDaysLeft;

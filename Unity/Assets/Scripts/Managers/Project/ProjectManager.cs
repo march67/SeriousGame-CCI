@@ -80,7 +80,7 @@ public class ProjectManager : MonoBehaviour
         }
     }
 
-    private void UpdateProjectDeadLine()
+    public void UpdateProjectDeadLine()
     {
         // at the beginning deadlineTimeLeft is equal to deadlineTime
         if (deadlineTimeInDaysLeft == 0 )

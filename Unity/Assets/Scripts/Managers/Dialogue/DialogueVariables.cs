@@ -32,8 +32,8 @@ public class DialogueVariables : ScriptableObject
         // Initialize dictionary with all existing functions
         functionMap = new Dictionary<string, Action>
         {
-            { "decreaseAllPlayersAllStatsBy50", PlayerStatManager.GetInstance().decreaseAllPlayersAllStatsBy50 },
-            { "increaseAllPlayersAllStatsBy100", PlayerStatManager.GetInstance().increaseAllPlayersAllStatsBy100 }
+            { "DecreaseAllPlayersAllStatsBy50", PlayerStatManager.GetInstance().DecreaseAllPlayersAllStatsBy50 },
+            { "IncreaseAllPlayersAllStatsBy100", PlayerStatManager.GetInstance().IncreaseAllPlayersAllStatsBy100 }
         };
     }
 

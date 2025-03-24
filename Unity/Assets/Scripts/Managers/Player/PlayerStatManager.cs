@@ -21,7 +21,7 @@ public class PlayerStatManager : MonoBehaviour
         instance = this;
     }
 
-    public void increaseAllPlayersAllStatsBy100()
+    public void IncreaseAllPlayersAllStatsBy100()
     {
         GameObject[] playersObject = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject playerObject in playersObject)
@@ -38,7 +38,7 @@ public class PlayerStatManager : MonoBehaviour
         }
     }
 
-    public void decreaseAllPlayersAllStatsBy50()
+    public void DecreaseAllPlayersAllStatsBy50()
     {
         GameObject[] playersObject = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject playerObject in playersObject)
@@ -55,7 +55,7 @@ public class PlayerStatManager : MonoBehaviour
         }
     }
 
-    public void increasePlayerTargetedStatByFive(GameObject targetedPlayer, string targetedStat)
+    public void IncreasePlayerTargetedStatByFive(GameObject targetedPlayer, string targetedStat)
     {
         // exemple of input (player, "art") / (player, "fun")
         int increaseValue = 5;

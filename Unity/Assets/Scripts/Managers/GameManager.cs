@@ -42,11 +42,9 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        // Instanciate PlayerStatGeneratorManager if doesn't exist yet
-        if (playerStatGeneratorManager == null)
-        {
-            playerStatGeneratorManager = GetComponent<PlayerStatGeneratorManager>();
-        }
+        ProjectManager.GetInstance().deadlineTimeInDays = 10;
+        ProjectManager.GetInstance().UpdateProjectDeadLine();
+        GameInformationUI.GetInstance().UpdateDeadlineDisplay();
     }
 
 }

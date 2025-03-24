@@ -15,19 +15,19 @@ Minusha0 ?
         
 === chosen1 ===
 decreaseAllPlayersAllStatsBy50 - text
--> final("decreaseAllPlayersAllStatsBy50")
+-> final("DecreaseAllPlayersAllStatsBy50")
 
 === chosen2 ===
 decreaseAllPlayersAllStatsBy50 - text
--> final("decreaseAllPlayersAllStatsBy50")
+-> final("DecreaseAllPlayersAllStatsBy50")
 
 === chosen3 ===
 increaseAllPlayersAllStatsBy100 - text
--> final("increaseAllPlayersAllStatsBy100")
+-> final("IncreaseAllPlayersAllStatsBy100")
 
 === chosen4 ===
 increaseAllPlayersAllStatsBy100 - text
--> final("increaseAllPlayersAllStatsBy100")
+-> final("IncreaseAllPlayersAllStatsBy100")
 
 === final(value) ===
 ~ functionToCall = value

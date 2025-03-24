@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,10 +23,28 @@ public class PlayerStatGeneratorManager : MonoBehaviour
     int statValueRetrieved;
     int statGenerated;
 
+    private static PlayerStatGeneratorManager instance;
+
+    public static PlayerStatGeneratorManager GetInstance()
+    {
+        return instance;
+    }
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            return;
+        }
+
+        instance = this;
+    }
+
+
     private void Start()
     {
-        PlayerStatManager.GetInstance().increaseAllPlayersAllStatsBy100();
-        PlayerStatManager.GetInstance().decreaseAllPlayersAllStatsBy50();
+        PlayerStatManager.GetInstance().IncreaseAllPlayersAllStatsBy100();
+        PlayerStatManager.GetInstance().DecreaseAllPlayersAllStatsBy50();
     }
 
     private void OnEnable()
@@ -98,7 +117,7 @@ public class PlayerStatGeneratorManager : MonoBehaviour
 
             // test
             string stat = stats[randomStatIndex].ToString();
-            PlayerStatManager.GetInstance().increasePlayerTargetedStatByFive(player, stat);
+            PlayerStatManager.GetInstance().IncreasePlayerTargetedStatByFive(player, stat);
         }
     }
 
