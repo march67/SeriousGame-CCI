@@ -27,16 +27,18 @@ public class GameInformationUI : MonoBehaviour
     private void OnEnable()
     {
         EventManager.AddListener(EventManager.EventType.DayEnd, UpdateDeadlineDisplay, 1);
+        EventManager.AddListener(EventManager.EventType.DayEnd, UpdateBudgetDisplay, 4);
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveListener(EventManager.EventType.DayEnd,UpdateDeadlineDisplay);
+        EventManager.RemoveListener(EventManager.EventType.DayEnd, UpdateDeadlineDisplay);
+        EventManager.RemoveListener(EventManager.EventType.DayEnd, UpdateBudgetDisplay);
     }
 
     public void UpdateDeadlineDisplay()
     {
-        // retrieve remaining days and format
+        // retrieve remaining days and format it to be displayable
         int deadlineTimeInDaysLeft = ProjectManager.GetInstance().deadlineTimeInDaysLeft;
 
         // change the format into week - day left, quotient = number of weeks and reste = number of days
@@ -48,5 +50,16 @@ public class GameInformationUI : MonoBehaviour
 
         DeadLineText.text = formatedDeadLine;
 
+    }
+
+    public void UpdateBudgetDisplay()
+    {
+        // retrieve current budget and format it to be displayable
+        int currentBudget = ProjectManager.GetInstance().currentBudget;
+
+        // change the format into a string with the dollar symbol
+        string formatedBudget = currentBudget.ToString() + "$";
+
+        BudgetText.text = formatedBudget;
     }
 }

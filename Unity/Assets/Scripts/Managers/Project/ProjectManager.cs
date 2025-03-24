@@ -9,6 +9,8 @@ public class ProjectManager : MonoBehaviour
     private int progressionValue;
     public StatProgression statProgression;
 
+    public int currentBudget;
+
     public int deadlineTimeInDays { private get; set; }
     public int deadlineTimeInDaysLeft { get; private set; }
 
@@ -32,12 +34,14 @@ public class ProjectManager : MonoBehaviour
     {
         EventManager.AddListener(EventManager.EventType.StatGeneration, UpdateProjectUI, 1);
         EventManager.AddListener(EventManager.EventType.DayEnd, UpdateProjectDeadLine, 0);
+        EventManager.AddListener(EventManager.EventType.DayEnd, UpdateProjectBudget, 3);
     }
 
     private void OnDisable()
     {
         EventManager.RemoveListener(EventManager.EventType.StatGeneration, UpdateProjectUI);
         EventManager.RemoveListener(EventManager.EventType.DayEnd, UpdateProjectDeadLine);
+        EventManager.RemoveListener(EventManager.EventType.DayEnd, UpdateProjectBudget);
     }
 
 
@@ -60,15 +64,15 @@ public class ProjectManager : MonoBehaviour
             // increment value depending on which random sprite got pulled
             if (successIntParse)
             {
-                if ( imageName.Contains("art"))
+                if (imageName.Contains("art"))
                 {
                     statProgression.artProgressionValue += progressionValue;
                 }
-                else if ( imageName.Contains("fun"))
+                else if (imageName.Contains("fun"))
                 {
                     statProgression.funProgressionValue += progressionValue;
                 }
-                else if ( imageName.Contains("creativity"))
+                else if (imageName.Contains("creativity"))
                 {
                     statProgression.creativityProgressionValue += progressionValue;
                 }
@@ -83,15 +87,21 @@ public class ProjectManager : MonoBehaviour
     public void UpdateProjectDeadLine()
     {
         // at the beginning deadlineTimeLeft is equal to deadlineTime
-        if (deadlineTimeInDaysLeft == 0 )
+        if (deadlineTimeInDaysLeft == 0)
         {
             deadlineTimeInDaysLeft = deadlineTimeInDays;
         }
 
         // each day passed, decrease the deadlineTimeLeft by one
-        if ( deadlineTimeInDaysLeft > 0 )
+        if (deadlineTimeInDaysLeft > 0)
         {
             deadlineTimeInDaysLeft -= 1;
         }
+    }
+
+    public void UpdateProjectBudget()
+    {
+        // budget test, scenario where budget increases by 50 everyday
+        currentBudget += 50;
     }
 }

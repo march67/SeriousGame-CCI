@@ -42,9 +42,13 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        // initialize first project informations
         ProjectManager.GetInstance().deadlineTimeInDays = 10;
+        ProjectManager.GetInstance().currentBudget = 500;
         ProjectManager.GetInstance().UpdateProjectDeadLine();
         GameInformationUI.GetInstance().UpdateDeadlineDisplay();
+        ProjectManager.GetInstance().UpdateProjectBudget();
+        GameInformationUI.GetInstance().UpdateBudgetDisplay();
     }
 
 }
