@@ -46,12 +46,8 @@ public class DialogueManager : MonoBehaviour
         }
 
         instance = this;
-    
-        //dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
      
         dialogueVariables = new DialogueVariables(globalsJsonAsset);
-        Debug.Log("");
-
     }
 
 
