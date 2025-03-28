@@ -118,22 +118,22 @@ public class PlayerStatGeneratorManager : MonoBehaviour
             textMeshProGUIComponent.text = "+ " + statGenerated.ToString();
 
             // test
-            string stat = stats[randomStatIndex].ToString();
-            PlayerStatManager.GetInstance().IncreasePlayerTargetedStatByFive(player, stat);
+            //string stat = stats[randomStatIndex].ToString();
+            //PlayerStatManager.GetInstance().IncreasePlayerTargetedStatByFive(player, stat);
         }
     }
 
     private void SendRandomStory()
     {
-        int randomIndexCharacter = Random.Range(0, 4);
-        //TextAsset[] textAssets = TextAssetPoolManager.GetInstance().GetTextAssetsFromSpecificPool(randomIndexCharacter);
-        //int randomIndexStory = Random.Range(0, textAssets.Length);
-        //TextAsset story = textAssets[randomIndexStory];
+        int randomIndexCharacter = Random.Range(0, 3);
+        TextAsset[] textAssets = TextAssetPoolManager.GetInstance().GetTextAssetsFromSpecificPool(randomIndexCharacter);
+        int randomIndexStory = Random.Range(1, textAssets.Length);
+        TextAsset story = textAssets[randomIndexStory];
+        DialogueManager.GetInstance().EnterDialogMode(story);
 
         // forcing minusha0 assettext
-        TextAsset[] textAssets2 = TextAssetPoolManager.GetInstance().GetTextAssetsFromSpecificPool(3);
-        TextAsset story2 = textAssets2[0];
-
-        DialogueManager.GetInstance().EnterDialogMode(story2);
+        //TextAsset[] textAssets2 = TextAssetPoolManager.GetInstance().GetTextAssetsFromSpecificPool(3);
+        //TextAsset story2 = textAssets2[0];
+        //DialogueManager.GetInstance().EnterDialogMode(story2);
     }
 }

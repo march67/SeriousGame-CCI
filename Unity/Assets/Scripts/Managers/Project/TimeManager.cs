@@ -9,7 +9,7 @@ public class TimeManager : MonoBehaviour
     // 1f = 1 seconde
     private float dayDuration = 10f; // x seconds = one day
     private float timeScale = 1f; // game speed multiplicator, = 0 if on stop, = 1 if normal speed / timer resumption
-    private float statGenerationInterval = 5f;
+    private float statGenerationInterval = 3f;
     private float currentDayTime = 0;
     private float lastStatGenerationTime = 0;
     private const float epsilon = 0.01f; // error margin, used before condition doesn't work before timer reset

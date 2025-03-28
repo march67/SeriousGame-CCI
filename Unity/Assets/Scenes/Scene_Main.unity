@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   folder1Path: Dialogues/Mathieu
-  folder2Path: DialoguesStephane
+  folder2Path: Dialogues/Stephane
   folder3Path: Dialogues/Sarah
   folder4Path: Dialogues/Minusha
   defaultCapacity: 10

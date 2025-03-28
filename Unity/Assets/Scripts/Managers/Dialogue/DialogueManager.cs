@@ -29,9 +29,6 @@ public class DialogueManager : MonoBehaviour
     //[SerializeField] private InkFile globalsInkFile;
 
     [SerializeField] private TextAsset globalsJsonAsset;
-
-
-
     public static DialogueManager GetInstance()
     {
         return instance;
